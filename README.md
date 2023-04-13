@@ -22,7 +22,7 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 
 **Tabs before the method (IIS)**
 ```py
-    GET /login.php HTTP/1.1
+GET /login.php HTTP/1.1
 Host: favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ```
